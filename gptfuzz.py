@@ -77,7 +77,7 @@ if __name__ == "__main__":
                         default='round_robin', help='The seed selection strategy')
     parser.add_argument("--max-new-tokens", type=int, default=512)
     parser.add_argument("--seed_path", type=str,
-                        default="datasets/prompts/GPTFuzzer.csv")
+                        default="GPTFuzz/datasets/prompts/GPTFuzzer.csv")
     add_model_args(parser)
 
     args = parser.parse_args()
