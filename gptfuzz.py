@@ -60,7 +60,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Fuzzing parameters')
-    parser.add_argument('--openai_key', type=str, default='', help='OpenAI API Key')
+    parser.add_argument('--openai_key', type=str, default=os.getenv('OPENAI_API_KEY'), help='OpenAI API Key')
     parser.add_argument('--claude_key', type=str, default='', help='Claude API Key')
     parser.add_argument('--palm_key', type=str, default='', help='PaLM2 api key')
     parser.add_argument('--model_path', type=str, default='gpt-3.5-turbo',
