@@ -36,7 +36,7 @@ def main(args):
 
     fuzzer = GPTFuzzer(
         questions=questions,
-        target_model=openai_model,
+        # target_model=openai_model,
         target=openai_model,
         predictor=roberta_model,
         initial_seed=initial_seed,
