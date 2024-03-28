@@ -101,7 +101,7 @@ class GPTFuzzer:
 
         self.energy: int = energy
         if result_file is None:
-            result_file = f'results-{time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())}.csv'
+            result_file = f'/output/results-{time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())}.csv'
 
         self.raw_fp = open(result_file, 'w', buffering=1)
         self.writter = csv.writer(self.raw_fp)
