@@ -43,7 +43,7 @@ def main(args):
         mutate_policy=MutateRandomSinglePolicy([
             OpenAIMutatorCrossOver(openai_model, temperature=0.0),  # for reproduction only, if you want better performance, use temperature>0
             OpenAIMutatorExpand(openai_model, temperature=0.0),
-            OpenAIMutatorGenerateSimilar(openai_model, temperature=0.0),
+            OpenAIMutatorGenerateSimilar(openai_model, temperature=0.5),
             OpenAIMutatorRephrase(openai_model, temperature=0.0),
             OpenAIMutatorShorten(openai_model, temperature=0.0)],
             concatentate=True,
