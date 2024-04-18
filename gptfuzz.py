@@ -25,7 +25,7 @@ def main(args):
     # openai_model = OpenAILLM(args.model_path, args.openai_key)  // removed openai dependency
     # target_model = PaLM2LLM(args.target_model, args.palm_key)
     # target_model = ClaudeLLM(args.target_model, args.claude_key)
-    target_model = LocalVLLM(args.target_model)
+    target_model = LocalLLM(args.target_model)
     mutator_model = target_model
     # target_model = LocalLLM(args.target_model) # we suggest using LocalVLLM for better performance, however if you are facing difficulties in installing vllm, you can use LocalLLM instead
     roberta_model = RoBERTaPredictor('hubert233/GPTFuzz', device='cuda:0')
