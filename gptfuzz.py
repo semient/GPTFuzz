@@ -4,7 +4,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'  # for debugging
 from fastchat.model import add_model_args
 import argparse
 import pandas as pd
-from gptfuzzer.fuzzer.selection import MCTSExploreSelectPolicy
+from gptfuzzer.fuzzer.selection import RoundRobinSelectPolicy
 from gptfuzzer.fuzzer.mutator import (
     MutateRandomSinglePolicy, OpenAIMutatorCrossOver, OpenAIMutatorExpand,
     OpenAIMutatorGenerateSimilar, OpenAIMutatorRephrase, OpenAIMutatorShorten)
