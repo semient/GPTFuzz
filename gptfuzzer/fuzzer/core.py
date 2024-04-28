@@ -75,7 +75,7 @@ class GPTFuzzer:
                  generate_in_batch: bool = False,
                  ):
 
-        self.questions: 'list[str]' = questions
+        self.questions: 'list[str]' = questions * (max_query // (len(questions) * len(initial_seed)))
         self.target: LLM = target
         self.predictor = predictor
         self.prompt_nodes: 'list[PromptNode]' = [
