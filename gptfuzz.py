@@ -25,7 +25,7 @@ def main(args):
     # openai_model = OpenAILLM(args.model_path, args.openai_key)  // removed openai dependency
     # target_model = PaLM2LLM(args.target_model, args.palm_key)
     # target_model = ClaudeLLM(args.target_model, args.claude_key)
-    target_model = LocalLLM(args.target_model)
+    target_model = LocalVLLM(args.target_model)
     mutator_model = target_model
     # target_model = LocalLLM(args.target_model) # we suggest using LocalVLLM for better performance, however if you are facing difficulties in installing vllm, you can use LocalLLM instead
     roberta_model = RoBERTaPredictor('hubert233/GPTFuzz', device='cuda:0')
@@ -42,11 +42,11 @@ def main(args):
         predictor=roberta_model,
         initial_seed=initial_seed,
         mutate_policy=MutateRandomSinglePolicy([
-            OpenAIMutatorCrossOver(mutator_model, temperature=0.2),  # for reproduction only, if you want better performance, use temperature>0
-            OpenAIMutatorExpand(mutator_model, temperature=0.2),
+            OpenAIMutatorCrossOver(mutator_model, temperature=0.0),  # for reproduction only, if you want better performance, use temperature>0
+            OpenAIMutatorExpand(mutator_model, temperature=0.0),
             OpenAIMutatorGenerateSimilar(mutator_model, temperature=0.2),
-            OpenAIMutatorRephrase(mutator_model, temperature=0.2),
-            OpenAIMutatorShorten(mutator_model, temperature=0.2)],
+            OpenAIMutatorRephrase(mutator_model, temperature=0.0),
+            OpenAIMutatorShorten(mutator_model, temperature=0.0)],
             concatentate=True,
         ),
         select_policy=MCTSExploreSelectPolicy(),
