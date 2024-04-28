@@ -49,7 +49,7 @@ def main(args):
             OpenAIMutatorShorten(mutator_model, temperature=0.0)],
             concatentate=True,
         ),
-        select_policy=MCTSExploreSelectPolicy(),
+        select_policy=RoundRobinSelectPolicy(),
         energy=args.energy,
         max_jailbreak=args.max_jailbreak,
         max_query=args.max_query,
