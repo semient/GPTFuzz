@@ -75,7 +75,7 @@ class GPTFuzzer:
                  generate_in_batch: bool = False,
                  ):
 
-        self.questions: 'list[str]' = questions * (max_query // (len(questions) * len(initial_seed)))
+        self.questions: 'list[str]' = questions
         self.target: LLM = target
         self.predictor = predictor
         self.prompt_nodes: 'list[PromptNode]' = [
@@ -108,7 +108,7 @@ class GPTFuzzer:
         self.writter.writerow(
             ['index', 'prompt', 'response', 'parent', 'results'])
 
-        self.generate_in_batch = False
+        self.generate_in_batch: bool = generate_in_batch
         if len(self.questions) > 0 and generate_in_batch is True:
             self.generate_in_batch = True
             if isinstance(self.target, LocalLLM):
@@ -135,7 +135,8 @@ class GPTFuzzer:
         try:
             while not self.is_stop():
                 seed = self.select_policy.select()
-                mutated_results = self.mutate_policy.mutate_single(seed)
+                for _ in range((max_query // (len(questions) * len(initial_seed)))):
+                    mutated_results.extend(self.mutate_policy.mutate_single(seed))
                 self.evaluate(mutated_results)
                 self.update(mutated_results)
                 self.log()
