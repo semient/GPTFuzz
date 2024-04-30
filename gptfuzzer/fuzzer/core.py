@@ -75,6 +75,7 @@ class GPTFuzzer:
                  generate_in_batch: bool = False,
                  ):
 
+        self.repeat_number = max_query // (len(questions) * len(initial_seed))
         self.questions: 'list[str]' = questions
         self.target: LLM = target
         self.predictor = predictor
@@ -135,7 +136,7 @@ class GPTFuzzer:
         try:
             while not self.is_stop():
                 seed = self.select_policy.select()
-                for _ in range((max_query // (len(questions) * len(initial_seed)))):
+                for _ in range(self.repeat_number):
                     mutated_results.extend(self.mutate_policy.mutate_single(seed))
                 self.evaluate(mutated_results)
                 self.update(mutated_results)
