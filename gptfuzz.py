@@ -53,7 +53,7 @@ def main(args):
         energy=args.energy,
         max_jailbreak=args.max_jailbreak,
         max_query=args.max_query,
-        generate_in_batch=False,
+        generate_in_batch=True,
     )
 
     fuzzer.run()
