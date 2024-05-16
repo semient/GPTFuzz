@@ -44,7 +44,7 @@ class OpenAIMutatorBase(Mutator):
         self.failure_sleep_time = failure_sleep_time
 
     def mutate_single(self, seed) -> 'list[str]':
-        return self.model.generate(seed, self.temperature, self.max_tokens, self.n, self.max_trials, self.failure_sleep_time)
+        return self.model.generate(seed, self.temperature, self.max_tokens)
 
 
 class OpenAIMutatorGenerateSimilar(OpenAIMutatorBase):
