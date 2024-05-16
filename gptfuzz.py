@@ -42,11 +42,11 @@ def main(args):
         predictor=roberta_model,
         initial_seed=initial_seed,
         mutate_policy=MutateRandomSinglePolicy([
-            OpenAIMutatorCrossOver(mutator_model, temperature=0.0),  # for reproduction only, if you want better performance, use temperature>0
-            OpenAIMutatorExpand(mutator_model, temperature=0.0),
+            OpenAIMutatorCrossOver(mutator_model, temperature=0.2),  # for reproduction only, if you want better performance, use temperature>0
+            OpenAIMutatorExpand(mutator_model, temperature=0.2),
             OpenAIMutatorGenerateSimilar(mutator_model, temperature=0.2),
-            OpenAIMutatorRephrase(mutator_model, temperature=0.0),
-            OpenAIMutatorShorten(mutator_model, temperature=0.0)],
+            OpenAIMutatorRephrase(mutator_model, temperature=0.2),
+            OpenAIMutatorShorten(mutator_model, temperature=0.2)],
             concatentate=True,
         ),
         select_policy=RoundRobinSelectPolicy(),
