@@ -151,7 +151,7 @@ class LocalLLM(LLM):
 class LocalVLLM(LLM):
     def __init__(self,
                  model_path,
-                 gpu_memory_utilization=0.95,
+                 gpu_memory_utilization=0.8,
                  system_message=None
                  ):
         super().__init__()
