@@ -22,10 +22,11 @@ httpx_logger.setLevel(logging.WARNING)
 def main(args):
     initial_seed = pd.read_csv(args.seed_path)['text'].tolist()
 
-    openai_model = OpenAILLM(args.model_path, args.openai_key)
+    # openai_model = OpenAILLM(args.model_path, args.openai_key)
     # target_model = PaLM2LLM(args.target_model, args.palm_key)
     # target_model = ClaudeLLM(args.target_model, args.claude_key)
-    # target_model = LocalVLLM(args.target_model)
+    target_model = LocalVLLM(args.target_model)
+    mutator_model = target_model
     # target_model = LocalLLM(args.target_model) # we suggest using LocalVLLM for better performance, however if you are facing difficulties in installing vllm, you can use LocalLLM instead
     roberta_model = RoBERTaPredictor('hubert233/GPTFuzz', device='cuda:0')
 
@@ -37,15 +38,15 @@ def main(args):
     fuzzer = GPTFuzzer(
         questions=questions,
         # target_model=openai_model,
-        target=openai_model,
+        target=target_model,
         predictor=roberta_model,
         initial_seed=initial_seed,
         mutate_policy=MutateRandomSinglePolicy([
-            OpenAIMutatorCrossOver(openai_model, temperature=0.0),  # for reproduction only, if you want better performance, use temperature>0
-            OpenAIMutatorExpand(openai_model, temperature=0.0),
-            OpenAIMutatorGenerateSimilar(openai_model, temperature=0.0),
-            OpenAIMutatorRephrase(openai_model, temperature=0.0),
-            OpenAIMutatorShorten(openai_model, temperature=0.0)],
+            OpenAIMutatorCrossOver(mutator_model, temperature=0.2),  # for reproduction only, if you want better performance, use temperature>0
+            OpenAIMutatorExpand(mutator_model, temperature=0.2),
+            OpenAIMutatorGenerateSimilar(mutator_model, temperature=0.2),
+            OpenAIMutatorRephrase(mutator_model, temperature=0.2),
+            OpenAIMutatorShorten(mutator_model, temperature=0.2)],
             concatentate=True,
         ),
         select_policy=MCTSExploreSelectPolicy(),
