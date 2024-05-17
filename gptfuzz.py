@@ -55,7 +55,7 @@ def main(args):
         target=target_model,
         predictor=roberta_model,
         initial_seed=initial_seed,
-        mutate_policy=MutateRandomSinglePolicy(mutators, concatenate=True),
+        mutate_policy=MutateRandomSinglePolicy(mutators, concatentate=True),
         select_policy=RoundRobinSelectPolicy(),
         energy=args.energy,
         max_jailbreak=args.max_jailbreak,
